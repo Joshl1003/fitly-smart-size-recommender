@@ -14,6 +14,13 @@
 - **AI/NLP**: Python (scikit-learn, transformers)
 - **Database**: PostgreSQL / Firebase
 
+## Dependencies
+- react/plasmo
+- node.js
+- express
+- cors
+- dotenv
+- nodemon
 ## 📂 Project Structure
 ...
 
