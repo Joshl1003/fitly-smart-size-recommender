@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int          @id @default(autoincrement())
+  email          String       @unique
+  passwordHash   String
+  name           String
+  profile        UserProfile? @relation(fields: [profileId], references: [id])
+  profileId      Int?         @unique
+  createdAt      DateTime     @default(now())
+
+  fitRecommendations FitRecommendation[]
+
+}
+
+model UserProfile {
+  id            Int     @id @default(autoincrement())
+  height        Int
+  weight        Int
+  chest         Int
+  waist         Int
+  hips          Int
+  fitPreference String
+
+  user          User?
+}
+
+model ClothingItem {
+  id           Int      @id @default(autoincrement())
+  brand        String
+  category     String
+  sizeLabel    String
+  chest        Int?
+  waist        Int?
+  length       Int?
+  hips         Int?
+  fitType      String
+  url          String
+
+  fitRecommendations FitRecommendation[]
+
+}
+
+model FitRecommendation {
+  id              Int           @id @default(autoincrement())
+  user            User          @relation(fields: [userId], references: [id])
+  userId          Int
+
+  clothingItem    ClothingItem  @relation(fields: [clothingItemId], references: [id])
+  clothingItemId  Int
+
+  rating          Int           // e.g. 1 to 5, or a custom scale
+  notes           String?       // Optional notes about the fit
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}

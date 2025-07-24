@@ -21,6 +21,8 @@
 - cors
 - dotenv
 - nodemon
+- prisma
+
 ## 📂 Project Structure
 ...
 
