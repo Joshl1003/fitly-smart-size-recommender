@@ -22,6 +22,8 @@
 - dotenv
 - nodemon
 - prisma
+- faker-js
+
 
 ## 📂 Project Structure
 ...

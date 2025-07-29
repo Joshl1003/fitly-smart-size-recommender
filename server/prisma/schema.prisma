@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
 }
 
 datasource db {
@@ -41,8 +42,11 @@ model UserProfile {
 model ClothingItem {
   id           Int      @id @default(autoincrement())
   brand        String
+  name         String
+  type         String
   category     String
   sizeLabel    String
+  gender       String
   chest        Int?
   waist        Int?
   length       Int?
